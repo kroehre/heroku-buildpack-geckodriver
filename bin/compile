@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+
+ARCHIVE_NAME=geckodriver
+FILE_NAME=geckodriver-v0.16.1-arm7hf.tar.gz
+PACKAGE_URL="https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-arm7hf.tar.gz"
+
+mkdir -p $CACHE_DIR
+if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
+  echo "-----> Fetching Geckodriver package from ${PACKAGE_URL}"
+  curl $PACKAGE_URL -L -o $CACHE_DIR/$FILE_NAME
+fi
+
+echo "-----> Extracting Geckodriver binaries to ${BUILD_DIR}/vendor/${ARCHIVE_NAME}"
+mkdir -p $CACHE_DIR/$ARCHIVE_NAME
+mkdir -p $BUILD_DIR/vendor
+tar -xvzf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
+mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/
+
+echo "-----> Writing profile script"
+mkdir -p $BUILD_DIR/.profile.d
+cat <<EOF >$BUILD_DIR/.profile.d/geckodriver.sh
+export PATH="\$PATH:\$HOME/vendor/geckodriver"
+EOF
+
+export PATH="\$PATH:\$BUILD_DIR/vendor/geckodriver"
