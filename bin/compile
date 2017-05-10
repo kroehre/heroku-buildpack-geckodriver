@@ -18,7 +18,7 @@ fi
 echo "-----> Extracting Geckodriver binaries to ${BUILD_DIR}/vendor/${ARCHIVE_NAME}"
 mkdir -p $CACHE_DIR/$ARCHIVE_NAME
 mkdir -p $BUILD_DIR/vendor
-tar -xvzf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
+tar -xvzf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR/$ARCHIVE_NAME
 mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/
 
 echo "-----> Writing profile script"
