@@ -6,8 +6,8 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 ARCHIVE_NAME=geckodriver
-FILE_NAME=geckodriver-v0.16.1-arm7hf.tar.gz
-PACKAGE_URL="https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-arm7hf.tar.gz"
+FILE_NAME=geckodriver-v0.16.1-linux64.tar.gz
+PACKAGE_URL="https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz"
 
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
